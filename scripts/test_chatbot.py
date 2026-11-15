@@ -52,30 +52,38 @@ async def test_alpha_chatbot():
         print("Pulsando avatar circular para abrir chat...")
         await page.click("#alpha-chat-toggle")
         await page.wait_for_timeout(600)
-        
+
+        # Verificar que el toggle flotante se haya ocultado mientras el chat está abierto
+        is_toggle_visible = await page.is_visible("#alpha-chat-toggle")
+        print(f"Toggle flotante visible mientras el chat está abierto: {is_toggle_visible}")
+        assert not is_toggle_visible, "El botón flotante del bot debe ocultarse al desplegar el chat"
+
         # Verificar que la ventana esté abierta
         is_open = await page.evaluate("() => document.getElementById('alpha-chat-window').classList.contains('is-open')")
         print(f"Chat Window isOpen: {is_open}")
         assert is_open == True
-        
+
         # Verificar encabezado y subtítulo
         title_text = await page.text_content("#alpha-chat-title")
         subtitle_text = await page.text_content("#alpha-chat-subtitle")
         print(f"Title: {title_text}, Subtitle: {subtitle_text}")
         assert "ALPHA" in title_text
-        
+
         # Verificar presencia de las 6 preguntas frecuentes
         quick_btns = await page.query_selector_all(".alpha-quick-btn")
         print(f"Total botones FAQ: {len(quick_btns)}")
         assert len(quick_btns) == 6
-        
+
         btn_texts = [await b.text_content() for b in quick_btns]
         print(f"Botones FAQ disponibles: {btn_texts}")
-        
-        # Probar click en FAQ: "¿Qué servicios ofrecen?"
-        print("Pulsando FAQ: ¿Qué servicios ofrecen?...")
-        await page.click("button[data-faq-id='servicios']")
+
+        # Probar click en FAQ: "¿Cómo funciona el adiestramiento?"
+        print("Pulsando FAQ: ¿Cómo funciona el adiestramiento?...")
+        await page.click("button[data-faq-id='adiestramiento']")
         await page.wait_for_timeout(1000)
+
+        # Captura de pantalla del chat abierto con respuesta limpia sin estorbo
+        await page.screenshot(path="assets/img/raw/test-mobile-chat-open-clean.png")
         
         # Verificar que haya llegado la respuesta del bot
         bot_msgs = await page.query_selector_all(".alpha-msg--bot")

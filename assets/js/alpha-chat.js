@@ -385,6 +385,8 @@
   function openChat() {
     if (state.isOpen) return;
     state.isOpen = true;
+    document.body.classList.add('alpha-chat-open');
+    if (container) container.classList.add('is-chat-open');
     chatWindow.classList.add('is-open');
     chatWindow.setAttribute('aria-hidden', 'false');
     toggleBtn.setAttribute('aria-expanded', 'true');
@@ -407,6 +409,8 @@
   function closeChat() {
     if (!state.isOpen) return;
     state.isOpen = false;
+    document.body.classList.remove('alpha-chat-open');
+    if (container) container.classList.remove('is-chat-open');
     chatWindow.classList.remove('is-open');
     chatWindow.setAttribute('aria-hidden', 'true');
     toggleBtn.setAttribute('aria-expanded', 'false');

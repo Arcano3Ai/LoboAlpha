@@ -1639,6 +1639,17 @@ body.menu-open {
   z-index: 1050;
 }
 
+/* Ocultar el botón flotante del bot cuando el chat esté desplegado para que no estorbe */
+body.alpha-chat-open .alpha-chat-toggle,
+.alpha-chat-toggle.is-active,
+.alpha-chat-root.is-chat-open .alpha-chat-toggle {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  transform: scale(0.3) !important;
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out), visibility .25s;
+}
+
 .alpha-chat-toggle:focus-visible {
   outline: 2px solid var(--lime-500);
   outline-offset: 4px;
@@ -2120,6 +2131,15 @@ body.menu-open {
 
   .alpha-chat-form {
     padding-bottom: max(.75rem, env(safe-area-inset-bottom));
+  }
+
+  /* Ocultar WhatsApp flotante en móvil mientras el chat esté abierto */
+  body.alpha-chat-open .wa-float {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(20px) !important;
+    transition: opacity .2s, transform .2s, visibility .2s;
   }
 }
 
