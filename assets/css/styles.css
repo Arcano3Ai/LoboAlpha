@@ -513,14 +513,14 @@ body.menu-open {
 
 /* ---------- 14. WhatsApp flotante ---------- */
 .wa-float {
-  position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 90;
-  width: 58px; height: 58px; border-radius: 50%; display: grid; place-items: center;
-  background: #25d366; color: #fff; box-shadow: 0 14px 30px -8px rgba(37,211,102,.6);
+  position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 74px); z-index: 90;
+  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
+  background: #25d366; color: #fff; box-shadow: 0 10px 24px -6px rgba(37,211,102,.55);
   transform: translateY(120px); opacity: 0; transition: transform .5s var(--ease-out), opacity .4s, box-shadow .3s;
 }
 .wa-float.is-visible { transform: none; opacity: 1; }
-.wa-float:hover { box-shadow: 0 18px 40px -8px rgba(37,211,102,.8); transform: scale(1.06); }
-.wa-float svg { width: 30px; height: 30px; }
+.wa-float:hover { box-shadow: 0 16px 36px -6px rgba(37,211,102,.75); transform: scale(1.06); }
+.wa-float svg { width: 28px; height: 28px; }
 
 /* ---------- 14b. Control de Audio Flotante (Música Loboalpha) ---------- */
 .audio-float {
@@ -1594,3 +1594,531 @@ body.menu-open {
   .js .reveal { opacity: 1; transform: none; }
   .hero-media img { transform: none; }
 }
+
+/* ==========================================================================
+   23. LOBOALPHA ASSISTANT (Chatbot "ALPHA AI")
+   ========================================================================== */
+.alpha-chat-root {
+  position: relative;
+  z-index: 1000;
+  font-family: inherit;
+}
+
+/* Disparador Flotante Circular */
+.alpha-chat-toggle {
+  position: fixed;
+  right: max(1.15rem, env(safe-area-inset-right));
+  bottom: max(1.15rem, env(safe-area-inset-bottom));
+  z-index: 1010;
+  width: 68px;
+  height: 68px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  transition: transform .35s var(--ease-out), filter .3s;
+}
+
+.alpha-chat-toggle:hover {
+  transform: scale(1.06);
+}
+
+.alpha-chat-toggle:focus-visible {
+  outline: 3px solid var(--lime-500);
+  outline-offset: 4px;
+}
+
+/* Contenedor del video con máscara circular perfecta */
+.alpha-avatar-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  /* Borde azul turquesa + halo verde lima corporativo */
+  border: 3px solid #06b6d4;
+  box-shadow: 0 0 0 3px rgba(132, 204, 22, 0.55),
+              0 14px 32px -4px rgba(15, 23, 42, 0.45);
+  background: #091a2f;
+  isolation: isolate;
+  transition: box-shadow .3s;
+}
+
+.alpha-chat-toggle:hover .alpha-avatar-wrap {
+  box-shadow: 0 0 0 4px #84cc16,
+              0 18px 40px -4px rgba(6, 182, 212, 0.45);
+}
+
+/* Video centrado exclusivamente en el perro */
+.alpha-avatar-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  border-radius: 50%;
+  pointer-events: none;
+  background: #0f172a;
+}
+
+/* Punto indicador de estado en vivo (verde lima) */
+.alpha-status-dot {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+  width: 13px;
+  height: 13px;
+  background: #84cc16;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(132, 204, 22, 0.9);
+  z-index: 2;
+  animation: alphaPulse 2.4s infinite;
+}
+
+@keyframes alphaPulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(132, 204, 22, 0.7); }
+  70% { transform: scale(1.05); box-shadow: 0 0 0 7px rgba(132, 204, 22, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(132, 204, 22, 0); }
+}
+
+/* Tooltip de bienvenida al hover/focus */
+.alpha-chat-tooltip {
+  display: none;
+}
+@media (min-width: 800px) {
+  .alpha-chat-tooltip {
+    display: block;
+    position: absolute;
+    right: calc(100% + 1rem);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: rgba(11, 18, 32, 0.94);
+    color: #ffffff;
+    font-size: .815rem;
+    font-weight: 600;
+    padding: .45rem .85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(6, 182, 212, 0.35);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity .3s, transform .3s;
+    box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.3);
+  }
+  .alpha-chat-toggle:hover .alpha-chat-tooltip,
+  .alpha-chat-toggle:focus-visible .alpha-chat-tooltip {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+/* Ventana de Chat */
+.alpha-chat-window {
+  position: fixed;
+  right: max(1.15rem, env(safe-area-inset-right));
+  bottom: calc(max(1.15rem, env(safe-area-inset-bottom)) + 80px);
+  z-index: 1020;
+  width: 380px;
+  max-width: calc(100vw - 2rem);
+  height: 570px;
+  max-height: calc(100svh - 110px);
+  background: #ffffff;
+  border-radius: 1.35rem;
+  box-shadow: 0 24px 60px -12px rgba(11, 18, 32, 0.32),
+              0 0 0 1px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.96);
+  transform-origin: bottom right;
+  transition: opacity .32s var(--ease-out), transform .32s var(--ease-out);
+}
+
+.alpha-chat-window.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+/* Header de la ventana */
+.alpha-chat-header {
+  background: linear-gradient(135deg, #091a2f 0%, #0d3a6e 100%);
+  color: #ffffff;
+  padding: .95rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid #06b6d4;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.alpha-header-identity {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.alpha-header-avatar {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #06b6d4;
+  flex-shrink: 0;
+  background: #091a2f;
+}
+
+.alpha-header-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.alpha-online-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: #84cc16;
+  border: 2px solid #091a2f;
+  border-radius: 50%;
+}
+
+.alpha-header-text .alpha-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  line-height: 1.2;
+}
+
+.alpha-badge-tag {
+  font-size: .65rem;
+  font-weight: 800;
+  background: #06b6d4;
+  color: #0b1220;
+  padding: .15rem .4rem;
+  border-radius: 4px;
+  letter-spacing: .05em;
+}
+
+.alpha-subtitle {
+  font-size: .75rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: .15rem 0 0;
+  line-height: 1.2;
+}
+
+.alpha-header-controls {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+}
+
+.alpha-btn-icon {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background .2s, transform .2s, color .2s;
+}
+
+.alpha-btn-icon:hover {
+  background: rgba(6, 182, 212, 0.25);
+  color: #22d3ee;
+  transform: scale(1.05);
+}
+
+.alpha-btn-icon:focus-visible {
+  outline: 2px solid var(--lime-500);
+}
+
+/* Área de mensajes con scroll suave */
+.alpha-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.15rem 1rem;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.alpha-msg {
+  display: flex;
+  gap: .65rem;
+  max-width: 90%;
+  animation: alphaMsgIn .25s var(--ease-out);
+}
+
+@keyframes alphaMsgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.alpha-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.alpha-msg--bot {
+  align-self: flex-start;
+}
+
+.alpha-msg__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1.5px solid #06b6d4;
+  flex-shrink: 0;
+  margin-top: .2rem;
+  background: #ffffff;
+}
+
+.alpha-msg__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.alpha-msg__bubble {
+  padding: .75rem .95rem;
+  border-radius: 1rem;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: #1e293b;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.alpha-msg--user .alpha-msg__bubble {
+  background: linear-gradient(135deg, var(--blue-600) 0%, #0369a1 100%);
+  color: #ffffff;
+  border-bottom-right-radius: .25rem;
+}
+
+.alpha-msg--bot .alpha-msg__bubble {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-bottom-left-radius: .25rem;
+}
+
+.alpha-msg__bubble p {
+  margin: 0;
+}
+.alpha-msg__bubble p + p {
+  margin-top: .5rem;
+}
+.alpha-msg__bubble strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+/* Botón de acción WhatsApp dentro de las respuestas */
+.alpha-msg__action {
+  margin-top: .75rem;
+  padding-top: .65rem;
+  border-top: 1px dashed rgba(15, 23, 42, 0.12);
+}
+
+.btn-alpha-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: #25d366;
+  color: #ffffff;
+  font-size: .815rem;
+  font-weight: 600;
+  padding: .5rem .85rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px -2px rgba(37, 211, 102, 0.4);
+  transition: transform .2s, box-shadow .2s, background-color .2s;
+}
+
+.btn-alpha-wa:hover {
+  background: #20bd5a;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -2px rgba(37, 211, 102, 0.6);
+  color: #ffffff;
+}
+
+/* Burbujas de Quick Replies */
+.alpha-quick-replies {
+  display: flex;
+  flex-direction: column;
+  gap: .45rem;
+  margin-top: .35rem;
+  animation: alphaMsgIn .3s ease-out;
+}
+
+.alpha-quick-btn {
+  background: #ffffff;
+  border: 1.5px solid rgba(6, 182, 212, 0.4);
+  color: #0369a1;
+  font-size: .815rem;
+  font-weight: 600;
+  padding: .55rem .85rem;
+  border-radius: .85rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+  line-height: 1.3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.alpha-quick-btn:hover {
+  background: #f0fdfa;
+  border-color: #06b6d4;
+  color: #0c4a6e;
+  transform: translateX(3px);
+  box-shadow: 0 4px 10px -2px rgba(6, 182, 212, 0.2);
+}
+
+.alpha-quick-btn:focus-visible {
+  outline: 2px solid var(--lime-500);
+}
+
+/* Indicador de tipeo */
+.alpha-msg--typing .alpha-typing-bubble {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: .65rem .9rem;
+}
+
+.alpha-typing-bubble span {
+  width: 6px;
+  height: 6px;
+  background: #0284c7;
+  border-radius: 50%;
+  animation: alphaBounce 1.2s infinite ease-in-out;
+}
+
+.alpha-typing-bubble span:nth-child(1) { animation-delay: 0s; }
+.alpha-typing-bubble span:nth-child(2) { animation-delay: .2s; }
+.alpha-typing-bubble span:nth-child(3) { animation-delay: .4s; }
+
+@keyframes alphaBounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: .4; }
+  40% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* Formulario de entrada */
+.alpha-chat-form {
+  padding: .75rem .85rem;
+  background: #ffffff;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+
+.alpha-chat-input {
+  flex: 1;
+  height: 42px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(15, 23, 42, 0.15);
+  padding: 0 1rem;
+  font-size: .875rem;
+  background: #f8fafc;
+  color: #0f172a;
+  outline: none;
+  transition: border-color .2s, background-color .2s, box-shadow .2s;
+}
+
+.alpha-chat-input:focus {
+  border-color: #06b6d4;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15);
+}
+
+.alpha-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, var(--blue-600) 0%, #0284c7 100%);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform .2s, box-shadow .2s, filter .2s;
+}
+
+.alpha-send-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 6px 14px -2px rgba(2, 132, 199, 0.45);
+}
+
+.alpha-send-btn:active {
+  transform: scale(0.96);
+}
+
+.alpha-send-btn:focus-visible {
+  outline: 2px solid var(--lime-500);
+}
+
+/* Ajustes Responsive para Móvil (< 600px) */
+@media (max-width: 600px) {
+  .alpha-chat-toggle {
+    width: 62px;
+    height: 62px;
+    right: max(.85rem, env(safe-area-inset-right));
+    bottom: max(.85rem, env(safe-area-inset-bottom));
+  }
+
+  .wa-float {
+    right: max(.85rem, env(safe-area-inset-right));
+    bottom: calc(max(.85rem, env(safe-area-inset-bottom)) + 68px);
+    width: 48px;
+    height: 48px;
+  }
+  .wa-float svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .alpha-chat-window {
+    right: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 84svh;
+    max-height: 84svh;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .alpha-chat-form {
+    padding-bottom: max(.75rem, env(safe-area-inset-bottom));
+  }
+}
+
