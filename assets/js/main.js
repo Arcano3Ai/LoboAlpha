@@ -11,10 +11,10 @@
   const CONFIG = Object.freeze({
     whatsappNumber: "528186866182",
     social: {
-      instagram: "", // ej. "https://www.instagram.com/loboalpha"
-      facebook: "",
+      youtube: "https://www.youtube.com/@loboalphatv",
+      instagram: "https://www.instagram.com/loboalphatv",
+      facebook: "https://www.facebook.com/profile.php?id=100057430391864",
       tiktok: "",
-      youtube: "",
     },
   });
 
