@@ -6,11 +6,10 @@
   "use strict";
 
   /* ---------- Configuración central ----------
-     IMPORTANTE: reemplazar por el número real de WhatsApp de Loboalpha
-     en formato internacional, solo dígitos (ej. 52 + lada + número).
-     Mientras esté vacío, los botones llevan a la sección de contacto. */
+     WhatsApp oficial de Loboalpha / Javier Baños: +52 81 8686 6182
+     Formato internacional sin signos: 528186866182 */
   const CONFIG = Object.freeze({
-    whatsappNumber: "", // ej. "5215512345678"
+    whatsappNumber: "528186866182",
     social: {
       instagram: "", // ej. "https://www.instagram.com/loboalpha"
       facebook: "",
@@ -23,7 +22,7 @@
   doc.classList.add("js");
 
   /* ---------- WhatsApp ---------- */
-  const DEFAULT_MSG = "Hola Loboalpha, me gustaría agendar una valoración para mi perro.";
+  const DEFAULT_MSG = "Hola Javier, me gustaría agendar una valoración para mi perro en Loboalpha.";
   const waLink = (msg) =>
     `https://wa.me/${CONFIG.whatsappNumber}?text=${encodeURIComponent(msg || DEFAULT_MSG)}`;
 

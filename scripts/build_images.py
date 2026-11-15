@@ -124,27 +124,52 @@ def build_logo() -> Image.Image:
 
 
 def build_og(logo_trimmed: Image.Image) -> None:
-    hero_src = find_raw("hero")
     W, H = 1200, 630
     canvas = Image.new("RGB", (W, H), (255, 255, 255))
-    if hero_src:
-        hero = ImageOps.exif_transpose(Image.open(hero_src)).convert("RGB")
-        photo_w = 640
+    photo_w = 660
+
+    # Preferimos la foto real de Javier Baños con su perro
+    jb_src = find_raw("javier-banos")
+    if jb_src:
+        jb = ImageOps.exif_transpose(Image.open(jb_src)).convert("RGB")
+        jw, jh = jb.size
+        target_h = jh
+        target_w = int(target_h * (photo_w / H))
+        if target_w > jw:
+            target_w = jw
+            target_h = int(target_w / (photo_w / H))
+        crop_left = int((jw - target_w) * 0.45)
+        crop_top = int((jh - target_h) * 0.2)
+        jb_crop = jb.crop((crop_left, crop_top, crop_left + target_w, crop_top + target_h))
+        jb_resized = jb_crop.resize((photo_w, H), Image.LANCZOS)
+        canvas.paste(jb_resized, (W - photo_w, 0))
+    elif find_raw("hero"):
+        hero = ImageOps.exif_transpose(Image.open(find_raw("hero"))).convert("RGB")
         hero = crop_to_aspect(hero, photo_w / H)
-        hero = hero.resize((photo_w, H), Image.LANCZOS)
-        canvas.paste(hero, (W - photo_w, 0))
-    # Panel blanco con el logotipo Ã­ntegro
-    panel_w = 560
-    logo_w = 470
-    logo_h = round(logo_w * logo_trimmed.height / logo_trimmed.width)
-    lg = logo_trimmed.resize((logo_w, logo_h), Image.LANCZOS)
-    canvas.paste(Image.new("RGB", (panel_w, H), (255, 255, 255)), (0, 0))
-    canvas.paste(lg, ((panel_w - logo_w) // 2, (H - logo_h) // 2))
+        canvas.paste(hero.resize((photo_w, H), Image.LANCZOS), (W - photo_w, 0))
+
+    # Panel blanco para el logotipo Loboalpha
+    panel_w = W - photo_w
+    logo_target_w = 460
+    logo_target_h = round(logo_target_w * logo_trimmed.height / logo_trimmed.width)
+    lg = logo_trimmed.resize((logo_target_w, logo_target_h), Image.LANCZOS)
+    canvas.paste(lg, ((panel_w - logo_target_w) // 2, (H - logo_target_h) // 2 - 15))
+
+    # Línea divisoria de marca
+    from PIL import ImageDraw
+    draw = ImageDraw.Draw(canvas)
+    for y in range(H):
+        ratio = y / H
+        r = int(15 * (1 - ratio) + 140 * ratio)
+        g = int(111 * (1 - ratio) + 198 * ratio)
+        b = int(209 * (1 - ratio) + 63 * ratio)
+        draw.line([(panel_w - 2, y), (panel_w, y)], fill=(r, g, b))
+
     dest = OUT / "og-loboalpha.jpg"
-    quality = 85
+    quality = 86
     while True:
         canvas.save(dest, "JPEG", quality=quality, optimize=True, progressive=True)
-        if dest.stat().st_size < 300 * 1024 or quality <= 50:
+        if dest.stat().st_size < 280 * 1024 or quality <= 50:
             break
         quality -= 5
     print(f"[OK] OG image: {round(dest.stat().st_size / 1024, 1)} KB (q={quality})")
