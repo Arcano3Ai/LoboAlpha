@@ -511,7 +511,472 @@ strong { font-weight: 600; color: var(--blue-900); }
   .dlg-body { padding: 2.75rem 2.5rem; }
 }
 
-/* ---------- 16. Animaciones de scroll ---------- */
+/* ---------- 16. Conoce a tu Instructor (Javier Baños) ---------- */
+.instructor {
+  background: linear-gradient(180deg, var(--soft) 0%, #fff 100%);
+  position: relative;
+  overflow: hidden;
+}
+.instructor-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+}
+.instructor-media {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius-lg);
+}
+.instructor-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+.instructor-badge {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  padding: .9rem 1.25rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, .8);
+}
+.instructor-badge strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--blue-900);
+}
+.instructor-badge span {
+  font-size: .85rem;
+  color: var(--blue-600);
+  font-weight: 600;
+}
+.instructor-role {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--blue-600);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+.instructor-features {
+  display: grid;
+  gap: .85rem;
+  margin: 1.75rem 0 2rem;
+}
+.instructor-feat {
+  display: flex;
+  align-items: flex-start;
+  gap: .9rem;
+  padding: .9rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.instructor-feat svg {
+  width: 20px;
+  height: 20px;
+  color: var(--lime-600);
+  flex: none;
+  margin-top: .15rem;
+}
+.instructor-feat strong {
+  display: block;
+  font-size: .96rem;
+  color: var(--blue-900);
+}
+.instructor-feat span {
+  font-size: .88rem;
+  color: var(--muted);
+}
+.instructor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  align-items: center;
+}
+@media (min-width: 960px) {
+  .instructor-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 4.5rem;
+  }
+}
+
+/* ---------- 17. Situaciones Atendidas ---------- */
+.situations-wrap {
+  margin-top: 4.5rem;
+  padding: 3rem clamp(1.25rem, 4vw, 3rem);
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+.situations-head {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+}
+.situations-head h3 {
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  margin-bottom: .6rem;
+}
+.situations-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .situations-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .situations-grid { grid-template-columns: repeat(3, 1fr); }
+  .situations-card:last-child { grid-column: span 3; }
+}
+.situations-card {
+  padding: 1.25rem 1.4rem;
+  border-radius: var(--radius);
+  background: var(--soft);
+  border: 1px solid transparent;
+  transition: transform .35s var(--ease-out), border-color .3s, background-color .3s, box-shadow .35s;
+}
+.situations-card:hover {
+  transform: translateY(-4px);
+  background: #fff;
+  border-color: rgba(26, 166, 228, .3);
+  box-shadow: var(--shadow);
+}
+.situations-card-header {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-bottom: .5rem;
+}
+.situations-card-header svg {
+  width: 20px;
+  height: 20px;
+  color: var(--blue-600);
+  flex: none;
+}
+.situations-card h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  margin: 0;
+  color: var(--blue-900);
+}
+.situations-card p {
+  margin: 0;
+  font-size: .92rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.situations-cta {
+  text-align: center;
+  margin-top: 2.25rem;
+}
+
+/* ---------- 18. Sección Método Natural ---------- */
+.natural-method {
+  position: relative;
+  background: linear-gradient(135deg, #091f38 0%, var(--blue-900) 60%, #0d3a6e 100%);
+  color: #fff;
+  overflow: hidden;
+}
+.natural-method::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(140, 198, 63, .12), transparent 50%),
+              radial-gradient(circle at 10% 80%, rgba(26, 166, 228, .15), transparent 50%);
+  pointer-events: none;
+}
+.natural-method .section-title {
+  color: #fff;
+}
+.natural-method .section-intro {
+  color: #c9d6e6;
+}
+.natural-method-grid {
+  display: grid;
+  gap: 3.5rem;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+@media (min-width: 960px) {
+  .natural-method-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4rem;
+  }
+}
+.natural-media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.natural-media img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+.natural-pillars-grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 600px) {
+  .natural-pillars-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.natural-pillar-card {
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, .06);
+  border: 1px solid rgba(255, 255, 255, .1);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: transform .35s var(--ease-out), background-color .3s;
+}
+.natural-pillar-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, .1);
+}
+.natural-pillar-ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--lime-500);
+  color: var(--blue-900);
+  margin-bottom: 1rem;
+}
+.natural-pillar-ico svg {
+  width: 22px;
+  height: 22px;
+}
+.natural-pillar-card h3 {
+  color: #fff;
+  font-size: 1.15rem;
+  margin-bottom: .45rem;
+}
+.natural-pillar-card p {
+  color: #c9d6e6;
+  margin: 0;
+  font-size: .92rem;
+  line-height: 1.55;
+}
+
+/* ---------- 19. Sección Comunicación Intuitiva ---------- */
+.intuitive-comm {
+  background: #ffffff;
+  position: relative;
+}
+.intuitive-grid {
+  display: grid;
+  gap: 3.5rem;
+  align-items: center;
+}
+@media (min-width: 960px) {
+  .intuitive-grid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 4.5rem;
+  }
+}
+.intuitive-card-diff {
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius);
+  background: var(--soft);
+  border-left: 4px solid var(--blue-400);
+  margin: 1.5rem 0 2rem;
+}
+.intuitive-card-diff strong {
+  display: block;
+  color: var(--blue-800);
+  margin-bottom: .35rem;
+  font-size: 1.05rem;
+}
+.intuitive-card-diff p {
+  margin: 0;
+  font-size: .95rem;
+  color: var(--muted);
+}
+.intuitive-cases {
+  display: grid;
+  gap: .8rem;
+  margin-bottom: 2.25rem;
+}
+.intuitive-case {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  font-size: .98rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+.intuitive-case svg {
+  width: 20px;
+  height: 20px;
+  color: var(--blue-600);
+  flex: none;
+}
+.intuitive-media {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.intuitive-media img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.intuitive-quote {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  right: 1.25rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: var(--radius);
+  background: rgba(11, 37, 69, .88);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, .15);
+}
+.intuitive-quote p {
+  margin: 0 0 .35rem;
+  font-style: italic;
+  font-size: .95rem;
+  line-height: 1.5;
+}
+.intuitive-quote span {
+  font-size: .82rem;
+  color: var(--lime-500);
+  font-weight: 600;
+}
+
+/* ---------- 20. Sección Talleres y Eventos ---------- */
+.workshops {
+  background: var(--soft);
+}
+.workshops-grid {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .workshops-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1100px) {
+  .workshops-grid { grid-template-columns: repeat(3, 1fr); }
+}
+.workshop-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  transition: transform .4s var(--ease-out), box-shadow .4s var(--ease-out);
+}
+.workshop-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+}
+.workshop-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.workshop-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .8s var(--ease-out);
+}
+.workshop-card:hover .workshop-media img {
+  transform: scale(1.05);
+}
+.workshop-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  background: var(--lime-500);
+  color: var(--blue-900);
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+.workshop-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.75rem 1.6rem;
+}
+.workshop-body h3 {
+  font-size: 1.28rem;
+  margin-bottom: .6rem;
+  line-height: 1.3;
+}
+.workshop-desc {
+  font-size: .94rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+.workshop-meta {
+  display: grid;
+  gap: .55rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+  font-size: .88rem;
+  color: var(--ink);
+}
+.workshop-meta-item {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+}
+.workshop-meta-item svg {
+  width: 18px;
+  height: 18px;
+  color: var(--blue-600);
+  flex: none;
+}
+.workshop-meta-item strong {
+  color: var(--blue-900);
+}
+.workshop-price {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--blue-900);
+  margin: 1.1rem 0 1.25rem;
+}
+.workshop-btn {
+  width: 100%;
+}
+.workshops-foot-cta {
+  text-align: center;
+  margin-top: 3.5rem;
+}
+
+/* ---------- 21. Animaciones de scroll ---------- */
 .js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); transition-delay: var(--d, 0s); }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 @media (min-width: 1100px) {

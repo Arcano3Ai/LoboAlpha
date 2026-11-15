@@ -152,6 +152,20 @@
       desc: "Entrenamos comandos, autocontrol y atención para que tu perro responda de forma confiable a tus instrucciones, en casa y en el exterior.",
       list: ["Paseos con jalones de correa o poca atención", "Necesitas que acuda al llamado de forma confiable", "Quieres fortalecer el autocontrol en situaciones cotidianas"],
     },
+    "metodo-natural": {
+      title: "Método natural de educación y adiestramiento",
+      img: "assets/img/metodo-natural-800.webp",
+      alt: "Método natural de educación canina sin coerción",
+      desc: "Educación basada en la motivación, la cooperación y el respeto al lenguaje propio de la especie canina. Sin métodos aversivos ni castigos, construyendo una confianza sólida y duradera.",
+      list: ["Buscas una alternativa positiva y respetuosa para educar", "Quieres que tu perro responda por convicción y vínculo, no por miedo", "Deseas paseos relajados y comunicación clara en el hogar"],
+    },
+    "comunicacion-intuitiva": {
+      title: "Comunicación intuitiva con animales",
+      img: "assets/img/comunicacion-intuitiva-800.webp",
+      alt: "Sesión de comunicación intuitiva con animales con Javier Baños",
+      desc: "Un espacio de conexión empática y profunda facilitado por Javier Baños para sintonizar con el mundo interno, emocional y vivencial de tu animal de compañía, comprendiendo lo que necesita expresar.",
+      list: ["Cambios repentinos en el ánimo o comportamiento sin causa médica", "Animales adoptados o rescatados con vivencias complejas", "Acompañamiento en procesos de duelo, cambio de hogar o etapa senior"],
+    },
   };
 
   const dialog = document.getElementById("service-dialog");
