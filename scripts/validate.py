@@ -23,7 +23,7 @@ for f in ("site.webmanifest",):
     except Exception as e:  # noqa: BLE001
         errors.append(f"{f} inválido: {e}")
 
-refs = set(re.findall(r"assets/(?:img|css|js)/[\w\-\.]+", html + js))
+refs = set(re.findall(r"assets/(?:img|css|js|audio)/[\w\-\.]+", html + js))
 missing = sorted(r for r in refs if not os.path.exists(r))
 if missing:
     errors.append(f"Recursos faltantes: {missing}")

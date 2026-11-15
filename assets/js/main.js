@@ -198,4 +198,82 @@
     document.querySelectorAll("[data-service]").forEach((btn) =>
       btn.addEventListener("click", () => document.getElementById("contacto")?.scrollIntoView()));
   }
+
+  /* ---------- Audio ambiental: Loboalpha (inicia al dar scroll en móvil) ---------- */
+  const audio = document.getElementById("bg-audio");
+  const audioBtn = document.getElementById("audio-toggle");
+  let audioStarted = false;
+  let userMuted = false;
+
+  const playAudio = () => {
+    if (!audio) return;
+    audio.volume = 0;
+    const p = audio.play();
+    if (p !== undefined) {
+      p.then(() => {
+        audioStarted = true;
+        audioBtn?.classList.add("is-playing");
+        audioBtn?.setAttribute("aria-pressed", "true");
+        audioBtn?.setAttribute("aria-label", "Pausar música de fondo Loboalpha");
+
+        // Fade in gradual y suave hasta 0.32 de volumen
+        let vol = 0;
+        const targetVol = 0.32;
+        const fadeTimer = setInterval(() => {
+          if (vol < targetVol) {
+            vol = Math.min(targetVol, vol + 0.04);
+            audio.volume = vol;
+          } else {
+            clearInterval(fadeTimer);
+          }
+        }, 120);
+      }).catch(() => {
+        // Autoplay bloqueado por políticas del navegador hasta siguiente gesto
+      });
+    }
+  };
+
+  const pauseAudio = () => {
+    if (!audio) return;
+    audio.pause();
+    audioBtn?.classList.remove("is-playing");
+    audioBtn?.setAttribute("aria-pressed", "false");
+    audioBtn?.setAttribute("aria-label", "Reproducir música de fondo Loboalpha");
+  };
+
+  const onFirstScroll = () => {
+    if (audioStarted || userMuted) return;
+    if (window.scrollY > 15) {
+      playAudio();
+      removeAudioListeners();
+    }
+  };
+
+  const onFirstTouch = () => {
+    if (audioStarted || userMuted) return;
+    playAudio();
+    removeAudioListeners();
+  };
+
+  const removeAudioListeners = () => {
+    window.removeEventListener("scroll", onFirstScroll);
+    window.removeEventListener("touchmove", onFirstScroll);
+    document.removeEventListener("touchstart", onFirstTouch);
+  };
+
+  window.addEventListener("scroll", onFirstScroll, { passive: true });
+  window.addEventListener("touchmove", onFirstScroll, { passive: true });
+  document.addEventListener("touchstart", onFirstTouch, { passive: true, once: true });
+
+  audioBtn?.addEventListener("click", () => {
+    if (!audio) return;
+    if (audio.paused) {
+      userMuted = false;
+      playAudio();
+      removeAudioListeners();
+    } else {
+      userMuted = true;
+      pauseAudio();
+    }
+  });
 })();

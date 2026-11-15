@@ -59,7 +59,27 @@ async def main():
         wa_href = await wa_float.get_attribute("href")
         print(f"Floating WhatsApp href: {wa_href}")
         
-        # 5. Full page mobile screenshot
+        # 5. Test Audio elements & trigger on scroll
+        audio_btn = page.locator("#audio-toggle")
+        audio_visible = await audio_btn.is_visible()
+        print(f"Audio float button visible: {audio_visible}")
+        
+        # Scroll down to trigger audio
+        await page.evaluate("() => window.scrollTo(0, 150)")
+        await page.wait_for_timeout(300)
+        
+        audio_src = await page.evaluate("() => document.getElementById('bg-audio').getAttribute('src')")
+        print(f"Audio src configured: {audio_src}")
+
+        # 6. Test Blog section & cards
+        blog_cards_count = await page.locator(".blog-card").count()
+        print(f"Blog cards count: {blog_cards_count}")
+
+        # 7. Check 0 horizontal overflow
+        widths = await page.evaluate("() => ({ docClient: document.documentElement.clientWidth, docScroll: document.documentElement.scrollWidth, bodyClient: document.body.clientWidth, bodyScroll: document.body.scrollWidth })")
+        print(f"Widths check: {widths}")
+
+        # 8. Full page mobile screenshot
         await page.screenshot(path="assets/img/raw/mobile-full-verified.png", full_page=True)
         print("Full mobile screenshot saved.")
         
