@@ -1,0 +1,300 @@
+{
+  "hero": {
+    "original": [
+      1365,
+      768
+    ],
+    "variants": [
+      {
+        "file": "hero-640.webp",
+        "w": 640,
+        "h": 360,
+        "kb": 34.5
+      },
+      {
+        "file": "hero-1024.webp",
+        "w": 1024,
+        "h": 576,
+        "kb": 69.1
+      },
+      {
+        "file": "hero-1376.webp",
+        "w": 1365,
+        "h": 768,
+        "kb": 104.2
+      }
+    ]
+  },
+  "cta": {
+    "original": [
+      1365,
+      768
+    ],
+    "variants": [
+      {
+        "file": "cta-640.webp",
+        "w": 640,
+        "h": 360,
+        "kb": 34.2
+      },
+      {
+        "file": "cta-1024.webp",
+        "w": 1024,
+        "h": 576,
+        "kb": 67.1
+      },
+      {
+        "file": "cta-1376.webp",
+        "w": 1365,
+        "h": 768,
+        "kb": 100.3
+      }
+    ]
+  },
+  "conexion": {
+    "original": [
+      1264,
+      848
+    ],
+    "variants": [
+      {
+        "file": "conexion-640.webp",
+        "w": 640,
+        "h": 429,
+        "kb": 70.6
+      },
+      {
+        "file": "conexion-1024.webp",
+        "w": 1024,
+        "h": 687,
+        "kb": 141.0
+      },
+      {
+        "file": "conexion-1264.webp",
+        "w": 1264,
+        "h": 848,
+        "kb": 194.1
+      }
+    ]
+  },
+  "filosofia": {
+    "original": [
+      896,
+      1120
+    ],
+    "variants": [
+      {
+        "file": "filosofia-480.webp",
+        "w": 480,
+        "h": 600,
+        "kb": 38.2
+      },
+      {
+        "file": "filosofia-896.webp",
+        "w": 896,
+        "h": 1120,
+        "kb": 103.1
+      }
+    ]
+  },
+  "psicologia": {
+    "original": [
+      1200,
+      896
+    ],
+    "variants": [
+      {
+        "file": "psicologia-480.webp",
+        "w": 480,
+        "h": 358,
+        "kb": 17.8
+      },
+      {
+        "file": "psicologia-800.webp",
+        "w": 800,
+        "h": 597,
+        "kb": 37.6
+      }
+    ]
+  },
+  "etologia": {
+    "original": [
+      1200,
+      896
+    ],
+    "variants": [
+      {
+        "file": "etologia-480.webp",
+        "w": 480,
+        "h": 358,
+        "kb": 33.1
+      },
+      {
+        "file": "etologia-800.webp",
+        "w": 800,
+        "h": 597,
+        "kb": 76.9
+      }
+    ]
+  },
+  "conducta": {
+    "original": [
+      1200,
+      896
+    ],
+    "variants": [
+      {
+        "file": "conducta-480.webp",
+        "w": 480,
+        "h": 358,
+        "kb": 33.3
+      },
+      {
+        "file": "conducta-800.webp",
+        "w": 800,
+        "h": 597,
+        "kb": 71.8
+      }
+    ]
+  },
+  "rehabilitacion": {
+    "original": [
+      1200,
+      896
+    ],
+    "variants": [
+      {
+        "file": "rehabilitacion-480.webp",
+        "w": 480,
+        "h": 358,
+        "kb": 21.6
+      },
+      {
+        "file": "rehabilitacion-800.webp",
+        "w": 800,
+        "h": 597,
+        "kb": 46.0
+      }
+    ]
+  },
+  "educacion": {
+    "original": [
+      1200,
+      896
+    ],
+    "variants": [
+      {
+        "file": "educacion-480.webp",
+        "w": 480,
+        "h": 358,
+        "kb": 37.7
+      },
+      {
+        "file": "educacion-800.webp",
+        "w": 800,
+        "h": 597,
+        "kb": 81.3
+      }
+    ]
+  },
+  "obediencia": {
+    "original": [
+      900,
+      675
+    ],
+    "variants": [
+      {
+        "file": "obediencia-480.webp",
+        "w": 480,
+        "h": 360,
+        "kb": 27.9
+      },
+      {
+        "file": "obediencia-800.webp",
+        "w": 800,
+        "h": 600,
+        "kb": 59.6
+      }
+    ]
+  },
+  "lenguaje-postura": {
+    "original": [
+      896,
+      1200
+    ],
+    "variants": [
+      {
+        "file": "lenguaje-postura-400.webp",
+        "w": 400,
+        "h": 536,
+        "kb": 14.2
+      },
+      {
+        "file": "lenguaje-postura-700.webp",
+        "w": 700,
+        "h": 938,
+        "kb": 35.6
+      }
+    ]
+  },
+  "lenguaje-mirada": {
+    "original": [
+      896,
+      1200
+    ],
+    "variants": [
+      {
+        "file": "lenguaje-mirada-400.webp",
+        "w": 400,
+        "h": 536,
+        "kb": 30.3
+      },
+      {
+        "file": "lenguaje-mirada-700.webp",
+        "w": 700,
+        "h": 938,
+        "kb": 69.3
+      }
+    ]
+  },
+  "lenguaje-movimiento": {
+    "original": [
+      896,
+      1200
+    ],
+    "variants": [
+      {
+        "file": "lenguaje-movimiento-400.webp",
+        "w": 400,
+        "h": 536,
+        "kb": 33.1
+      },
+      {
+        "file": "lenguaje-movimiento-700.webp",
+        "w": 700,
+        "h": 938,
+        "kb": 73.8
+      }
+    ]
+  },
+  "lenguaje-senales": {
+    "original": [
+      896,
+      1200
+    ],
+    "variants": [
+      {
+        "file": "lenguaje-senales-400.webp",
+        "w": 400,
+        "h": 536,
+        "kb": 17.0
+      },
+      {
+        "file": "lenguaje-senales-700.webp",
+        "w": 700,
+        "h": 938,
+        "kb": 39.8
+      }
+    ]
+  }
+}
