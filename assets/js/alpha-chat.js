@@ -443,7 +443,6 @@
             <source src="assets/media/alpha-avatar.mp4" type="video/mp4">
             <source src="assets/media/alpha-avatar.webm" type="video/webm">
           </video>
-          <span class="alpha-status-dot" aria-hidden="true"></span>
         </div>
         <span class="alpha-chat-tooltip" aria-hidden="true">¡Hola! Pregúntale a ALPHA 🐾</span>
       </button>
