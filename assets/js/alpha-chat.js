@@ -448,6 +448,7 @@
       <!-- Botón Flotante con Avatar de Video Circular -->
       <button class="alpha-chat-toggle" id="alpha-chat-toggle" type="button"
               aria-label="Abrir asistente virtual Loboalpha: ALPHA" aria-expanded="false" aria-controls="alpha-chat-window">
+        <span class="alpha-woof-bubble" aria-hidden="true">¡Woof, woof! 🐾</span>
         <div class="alpha-avatar-wrap">
           <video class="alpha-avatar-video" autoplay loop muted playsinline preload="metadata" poster="assets/media/alpha-avatar-poster.jpg">
             <source src="assets/media/alpha-avatar.mp4" type="video/mp4">

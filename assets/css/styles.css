@@ -1655,6 +1655,55 @@ body.alpha-chat-open .alpha-chat-toggle,
   outline-offset: 4px;
 }
 
+/* Bocadillo / Burbuja de ladrido "¡Woof, woof!" arriba del bot */
+.alpha-woof-bubble {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  right: 0;
+  background: #ffffff;
+  color: #0b2545;
+  font-size: .815rem;
+  font-weight: 800;
+  padding: .35rem .75rem;
+  border-radius: 999px;
+  border: 2px solid #06b6d4;
+  box-shadow: 0 8px 20px -2px rgba(11, 37, 69, 0.22),
+              0 0 0 2px rgba(132, 204, 22, 0.5);
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1015;
+  animation: alphaWoofBounce 2.2s ease-in-out infinite alternate;
+  transition: opacity .25s var(--ease-out), transform .25s var(--ease-out);
+}
+
+/* Flechita inferior del bocadillo apuntando hacia el perrito */
+.alpha-woof-bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  right: 24px;
+  border-width: 6px 6px 0 6px;
+  border-style: solid;
+  border-color: #06b6d4 transparent transparent transparent;
+}
+
+@keyframes alphaWoofBounce {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Al interactuar o hacer hover para crecer al 200%, desvanecer el bocadillo */
+.alpha-chat-toggle:hover .alpha-woof-bubble,
+.alpha-chat-toggle:active .alpha-woof-bubble,
+.alpha-chat-toggle.is-interacting .alpha-woof-bubble {
+  opacity: 0;
+  transform: scale(0.6) translateY(6px);
+}
+
 /* Contenedor del video con máscara circular perfecta */
 .alpha-avatar-wrap {
   position: relative;

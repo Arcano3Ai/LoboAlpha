@@ -38,8 +38,16 @@ async def test_alpha_chatbot():
         print(f"Bot Box: y={bot_bbox['y']}, height={bot_bbox['height']}")
         assert bot_bbox['y'] < wa_bbox['y'], "El Bot debe estar arriba de WhatsApp"
 
-        # Tomar screenshot con el avatar cerrado en móvil (estado normal)
-        await page.screenshot(path="assets/img/raw/test-mobile-closed.png")
+        # Verificar presencia y posición del bocadillo "¡Woof, woof!"
+        woof_el = await page.query_selector(".alpha-woof-bubble")
+        assert woof_el is not None, "El bocadillo .alpha-woof-bubble debe existir"
+        woof_text = await woof_el.text_content()
+        print(f"Bocadillo de ladrido: '{woof_text}'")
+        assert "Woof" in woof_text
+
+        # Tomar screenshot con el avatar cerrado en móvil (con el Woof arriba)
+        await page.screenshot(path="assets/img/raw/test-mobile-woof-bubble.png")
+        print("Screenshot de burbuja Woof guardado.")
 
         # Probar interacción / hover (crecimiento al 200%)
         print("Activando hover/interacción en el bot...")
