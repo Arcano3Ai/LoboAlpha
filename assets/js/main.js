@@ -47,14 +47,12 @@
   const year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());
 
-  /* ---------- Header: estado al hacer scroll + WhatsApp flotante ---------- */
+  /* ---------- Header: estado al hacer scroll ---------- */
   const header = document.querySelector(".site-header");
-  const waFloat = document.querySelector(".wa-float");
   let ticking = false;
   const onScroll = () => {
     const y = window.scrollY;
     header?.classList.toggle("is-scrolled", y > 24);
-    waFloat?.classList.toggle("is-visible", y > window.innerHeight * 0.6);
     ticking = false;
   };
   window.addEventListener("scroll", () => {

@@ -513,14 +513,22 @@ body.menu-open {
 
 /* ---------- 14. WhatsApp flotante ---------- */
 .wa-float {
-  position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: calc(max(1rem, env(safe-area-inset-bottom)) + 74px); z-index: 90;
-  width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center;
-  background: #25d366; color: #fff; box-shadow: 0 10px 24px -6px rgba(37,211,102,.55);
-  transform: translateY(120px); opacity: 0; transition: transform .5s var(--ease-out), opacity .4s, box-shadow .3s;
+  position: fixed;
+  right: max(1.15rem, env(safe-area-inset-right));
+  bottom: max(1.15rem, env(safe-area-inset-bottom));
+  z-index: 95;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #25d366;
+  color: #fff;
+  box-shadow: 0 10px 24px -4px rgba(37,211,102,.5);
+  transition: transform .35s var(--ease-out), box-shadow .3s;
 }
-.wa-float.is-visible { transform: none; opacity: 1; }
-.wa-float:hover { box-shadow: 0 16px 36px -6px rgba(37,211,102,.75); transform: scale(1.06); }
-.wa-float svg { width: 28px; height: 28px; }
+.wa-float:hover { box-shadow: 0 16px 36px -6px rgba(37,211,102,.75); transform: scale(1.08); }
+.wa-float svg { width: 30px; height: 30px; }
 
 /* ---------- 14b. Control de Audio Flotante (Música Loboalpha) ---------- */
 .audio-float {
@@ -1608,7 +1616,7 @@ body.menu-open {
 .alpha-chat-toggle {
   position: fixed;
   right: max(1.15rem, env(safe-area-inset-right));
-  bottom: max(1.15rem, env(safe-area-inset-bottom));
+  bottom: calc(max(1.15rem, env(safe-area-inset-bottom)) + 70px);
   z-index: 1010;
   width: 68px;
   height: 68px;
@@ -1618,15 +1626,21 @@ body.menu-open {
   cursor: pointer;
   outline: none;
   border-radius: 50%;
-  transition: transform .35s var(--ease-out), filter .3s;
+  transform-origin: bottom right;
+  transition: transform .4s cubic-bezier(0.34, 1.56, 0.64, 1), filter .3s;
 }
 
-.alpha-chat-toggle:hover {
-  transform: scale(1.06);
+/* Crecer un 200% (2x) al pasar el mouse o interactuar */
+.alpha-chat-toggle:hover,
+.alpha-chat-toggle:focus-visible,
+.alpha-chat-toggle:active,
+.alpha-chat-toggle.is-interacting {
+  transform: scale(2);
+  z-index: 1050;
 }
 
 .alpha-chat-toggle:focus-visible {
-  outline: 3px solid var(--lime-500);
+  outline: 2px solid var(--lime-500);
   outline-offset: 4px;
 }
 
@@ -1719,12 +1733,12 @@ body.menu-open {
 .alpha-chat-window {
   position: fixed;
   right: max(1.15rem, env(safe-area-inset-right));
-  bottom: calc(max(1.15rem, env(safe-area-inset-bottom)) + 80px);
+  bottom: calc(max(1.15rem, env(safe-area-inset-bottom)) + 148px);
   z-index: 1020;
   width: 380px;
   max-width: calc(100vw - 2rem);
   height: 570px;
-  max-height: calc(100svh - 110px);
+  max-height: calc(100svh - 170px);
   background: #ffffff;
   border-radius: 1.35rem;
   box-shadow: 0 24px 60px -12px rgba(11, 18, 32, 0.32),
@@ -2084,22 +2098,30 @@ body.menu-open {
 
 /* Ajustes Responsive para Móvil (< 600px) */
 @media (max-width: 600px) {
-  .alpha-chat-toggle {
-    width: 62px;
-    height: 62px;
-    right: max(.85rem, env(safe-area-inset-right));
-    bottom: max(.85rem, env(safe-area-inset-bottom));
-  }
-
   .wa-float {
     right: max(.85rem, env(safe-area-inset-right));
-    bottom: calc(max(.85rem, env(safe-area-inset-bottom)) + 68px);
-    width: 48px;
-    height: 48px;
+    bottom: max(.85rem, env(safe-area-inset-bottom));
+    width: 50px;
+    height: 50px;
   }
   .wa-float svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .alpha-chat-toggle {
+    width: 58px;
+    height: 58px;
+    right: max(.85rem, env(safe-area-inset-right));
+    bottom: calc(max(.85rem, env(safe-area-inset-bottom)) + 62px);
+    transform-origin: bottom right;
+  }
+
+  .alpha-chat-toggle:hover,
+  .alpha-chat-toggle:active,
+  .alpha-chat-toggle.is-interacting {
+    transform: scale(2);
+    z-index: 1050;
   }
 
   .alpha-chat-window {

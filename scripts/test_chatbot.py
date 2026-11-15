@@ -30,9 +30,23 @@ async def test_alpha_chatbot():
         print(f"Avatar Video: muted={is_muted}, loop={is_loop}")
         assert is_muted == True, "El video debe estar mudo por defecto"
         assert is_loop == True, "El video debe estar en loop"
-        
-        # Tomar screenshot con el avatar cerrado en móvil
+
+        # Verificar posiciones relativas: WhatsApp abajo, Bot arriba
+        wa_bbox = await page.locator(".wa-float").bounding_box()
+        bot_bbox = await page.locator("#alpha-chat-toggle").bounding_box()
+        print(f"WhatsApp Box: y={wa_bbox['y']}, height={wa_bbox['height']}")
+        print(f"Bot Box: y={bot_bbox['y']}, height={bot_bbox['height']}")
+        assert bot_bbox['y'] < wa_bbox['y'], "El Bot debe estar arriba de WhatsApp"
+
+        # Tomar screenshot con el avatar cerrado en móvil (estado normal)
         await page.screenshot(path="assets/img/raw/test-mobile-closed.png")
+
+        # Probar interacción / hover (crecimiento al 200%)
+        print("Activando hover/interacción en el bot...")
+        await page.hover("#alpha-chat-toggle")
+        await page.wait_for_timeout(400)
+        await page.screenshot(path="assets/img/raw/test-mobile-hover-zoom200.png")
+        print("Screenshot de hover al 200% guardado.")
         
         # Hacer clic en el avatar para abrir la ventana
         print("Pulsando avatar circular para abrir chat...")

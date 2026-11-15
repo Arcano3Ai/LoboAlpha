@@ -519,6 +519,14 @@
     toggleBtn.addEventListener('click', toggleChat);
     closeBtn.addEventListener('click', closeChat);
 
+    // Efecto de interacción (crecimiento al 200%) en hover y dispositivos táctiles
+    toggleBtn.addEventListener('mouseenter', () => toggleBtn.classList.add('is-interacting'));
+    toggleBtn.addEventListener('mouseleave', () => toggleBtn.classList.remove('is-interacting'));
+    toggleBtn.addEventListener('touchstart', () => toggleBtn.classList.add('is-interacting'), { passive: true });
+    toggleBtn.addEventListener('touchend', () => {
+      setTimeout(() => toggleBtn.classList.remove('is-interacting'), 1200);
+    }, { passive: true });
+
     muteBtn.addEventListener('click', () => {
       setMuted(!state.isMuted);
     });
