@@ -63,6 +63,14 @@ async def test_alpha_chatbot():
         print(f"Chat Window isOpen: {is_open}")
         assert is_open == True
 
+        # Verificar que el header contenga el orbe en video animado
+        header_video = await page.query_selector(".alpha-header-video")
+        assert header_video is not None, "El header debe contener el orbe animado en video (.alpha-header-video)"
+        is_header_muted = await header_video.evaluate("el => el.muted")
+        is_header_loop = await header_video.evaluate("el => el.loop")
+        print(f"Header Video: muted={is_header_muted}, loop={is_header_loop}")
+        assert is_header_muted == True and is_header_loop == True
+
         # Verificar encabezado y subtítulo
         title_text = await page.text_content("#alpha-chat-title")
         subtitle_text = await page.text_content("#alpha-chat-subtitle")

@@ -395,6 +395,12 @@
     // Reproducir ladrido en la interacción
     playBark();
 
+    // Asegurar reproducción del video del orbe en el header
+    const headerVideo = chatWindow.querySelector('.alpha-header-video');
+    if (headerVideo) {
+      headerVideo.play().catch(() => {});
+    }
+
     // Si es la primera vez que se abre, asegurar que hay mensaje de bienvenida
     if (messagesContainer.children.length === 0) {
       renderWelcome();
@@ -457,9 +463,11 @@
         <!-- Header -->
         <header class="alpha-chat-header">
           <div class="alpha-header-identity">
-            <div class="alpha-header-avatar">
-              <img src="assets/media/alpha-avatar-poster.jpg" alt="ALPHA avatar" width="40" height="40">
-              <span class="alpha-online-badge" aria-hidden="true"></span>
+            <div class="alpha-header-avatar" title="ALPHA">
+              <video class="alpha-header-video" autoplay loop muted playsinline preload="auto" poster="assets/media/alpha-avatar-poster.jpg">
+                <source src="assets/media/alpha-avatar.mp4" type="video/mp4">
+                <source src="assets/media/alpha-avatar.webm" type="video/webm">
+              </video>
             </div>
             <div class="alpha-header-text">
               <h2 id="alpha-chat-title" class="alpha-title">ALPHA <span class="alpha-badge-tag">AI</span></h2>
