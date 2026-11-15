@@ -167,8 +167,12 @@ main { overflow-x: clip; width: 100%; max-width: 100%; }
 .brand img { height: 52px; width: auto; transition: height .35s var(--ease); }
 .site-header.is-scrolled .brand img { height: 46px; }
 
+body.menu-open {
+  overflow: hidden;
+}
+
 .nav-toggle {
-  position: relative; z-index: 105;
+  position: relative; z-index: 10001;
   width: 48px; height: 48px; min-width: 48px; min-height: 48px; border-radius: 12px;
   display: grid; place-content: center; gap: 5px;
   background: var(--soft);
@@ -182,27 +186,35 @@ main { overflow-x: clip; width: 100%; max-width: 100%; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 .main-nav {
-  position: fixed; top: var(--header-h); left: 0; right: 0; bottom: 0;
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  width: 100vw;
+  width: 100%;
+  height: calc(100svh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
   background: #ffffff;
-  padding: 1.5rem var(--gutter) 2.5rem;
+  padding: 1.25rem var(--gutter) max(5rem, calc(env(safe-area-inset-bottom, 0px) + 3.5rem));
   box-shadow: 0 30px 40px -20px rgba(11, 37, 69, .25);
   transform: translateY(-8px); opacity: 0; visibility: hidden;
   transition: transform .35s var(--ease-out), opacity .3s, visibility .3s;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  z-index: 99;
+  overscroll-behavior: contain;
+  z-index: 10000;
 }
 .main-nav.is-open { transform: none; opacity: 1; visibility: visible; }
 .main-nav ul { display: grid; gap: .25rem; margin-bottom: 1.5rem; }
 .main-nav a:not(.btn) {
-  display: block; padding: 1rem .25rem; font-family: var(--font-display); font-weight: 500; font-size: 1.12rem;
+  display: block; padding: .95rem .25rem; font-family: var(--font-display); font-weight: 500; font-size: 1.1rem;
   color: var(--blue-900); border-bottom: 1px solid var(--line);
   -webkit-tap-highlight-color: transparent;
 }
 .main-nav a:not(.btn):active { color: var(--blue-600); }
-.nav-cta { width: 100%; min-height: 50px; }
+.nav-cta { width: 100%; min-height: 52px; }
 
 @media (min-width: 960px) {
+  body.menu-open { overflow: visible; }
   :root { --header-h: 92px; }
   .site-header.is-scrolled { height: 72px; }
   .brand img { height: 74px; }
@@ -210,7 +222,9 @@ main { overflow-x: clip; width: 100%; max-width: 100%; }
   .nav-toggle { display: none; }
   .main-nav {
     position: static; display: flex; align-items: center; gap: 2rem;
+    width: auto; height: auto;
     background: none; padding: 0; box-shadow: none; transform: none; opacity: 1; visibility: visible;
+    overflow: visible; z-index: auto;
   }
   .main-nav ul { display: flex; gap: 1.75rem; margin: 0; }
   .main-nav a:not(.btn) {
@@ -222,7 +236,7 @@ main { overflow-x: clip; width: 100%; max-width: 100%; }
   }
   .main-nav a:not(.btn):hover::after, .main-nav a.is-active::after { transform: scaleX(1); transform-origin: left; }
   .main-nav a.is-active { color: var(--blue-600); }
-  .nav-cta { width: auto; }
+  .nav-cta { width: auto; min-height: auto; }
 }
 
 /* ---------- 6. Hero ---------- */
